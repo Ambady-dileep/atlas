@@ -67,3 +67,4 @@ class LearningLog(models.Model):
 
     def __str__(self):
         return f"{self.topic.title} - {self.created_at.date()}"
+    
