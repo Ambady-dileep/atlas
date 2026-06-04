@@ -32,7 +32,6 @@ ALLOWED_HOSTS = config(
     default="127.0.0.1"
 ).split(",")
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -45,6 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "django_filters",
+    "drf_spectacular",
 
     # Local Apps
     "apps.accounts",
@@ -60,6 +60,12 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Atlas API",
+    "DESCRIPTION": "Personal Developer Learning Tracker API",
+    "VERSION": "1.0.0",
+}
 
 ROOT_URLCONF = "config.urls"
 
@@ -112,6 +118,9 @@ AUTH_PASSWORD_VALIDATORS = [
 ]     
 
 REST_FRAMEWORK = {
+    
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    
     "DEFAULT_AUTHENTICATION_CLASSES" : (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
@@ -122,9 +131,7 @@ REST_FRAMEWORK = {
         "rest_framework.filters.OrderingFilter",
     ],
     
-    "DEFAULT_PAGINATION_CLASS": (
-        "rest_framework.pagination.PageNumberPagination"
-    ),
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
 
     "PAGE_SIZE": 5,
 }
